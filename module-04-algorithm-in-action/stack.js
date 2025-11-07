@@ -32,7 +32,7 @@ export default class Stack {
     }
 
     print() {
-        console.log(this.items.length > 0 ? this.items.slice().reverse().join("->") : this.items);
+        console.log(this.items.slice().reverse().join("->"));
     }
 }
 
