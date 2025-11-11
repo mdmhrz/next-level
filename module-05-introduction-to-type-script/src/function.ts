@@ -31,3 +31,4 @@ poorUser.addBalance(500);
 const arr: number[] = [1, 2, 3]
 
 const sqrArray = arr.map((element: number): number => element * element) 
+
