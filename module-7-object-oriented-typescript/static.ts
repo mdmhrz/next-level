@@ -7,7 +7,7 @@ class Counter {
         return (Counter.count = Counter.count + 1)
     }
 
-    decrement() {
+    static decrement() {
         return (Counter.count = Counter.count - 1)
     }
 }
@@ -26,5 +26,7 @@ instance1.increment()
 instance1.increment()
 instance1.increment()
 instance1.increment()
+
+Counter.decrement()
 
 console.log(Counter.count);
