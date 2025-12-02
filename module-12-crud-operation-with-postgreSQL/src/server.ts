@@ -6,16 +6,34 @@ import 'dotenv/config';
 const app = express()
 const port = 5000
 
-// postgreSQL connection pool
+// postgreSQL DB connection pool
 const pool = new Pool({
   connectionString: process.env.PG_CONNECTION_STRING
 })
 
-console.log(pool);
+const initDB = async () => {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS users(
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(100) NOT NULL,
+      email VARCHAR(150) UNIQUE NOT NULL,
+      age INT,
+      phone VARCHAR(15),
+      address TEXT,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW()
+    )
+    `)
+}
+
+initDB()
+
+
 
 // Parser
 app.use(express.json())
 // app.use(express.urlencoded())
+// hello
 
 
 
