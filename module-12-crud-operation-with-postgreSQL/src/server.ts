@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import { Pool } from "pg";
 import path from "path";
@@ -92,13 +92,22 @@ initDB();
 
 
 
+// logger middleware
+
+const logger = (req: Request, res: Response, next: NextFunction) => {
+  console.log(`[${new Date().toDateString()}] ${req.method} ${req.path}\n`);
+  next()
+}
+
+
+
 // Parser
 app.use(express.json());
 
 
 // Root route get method
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello')
+app.get('/', logger, (req: Request, res: Response) => {
+  res.send('Hello World')
 });
 
 
@@ -342,7 +351,13 @@ app.get("/todos", async (req: Request, res: Response) => {
 
 
 
-
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+    path: req.path
+  })
+})
 
 // server listen
 app.listen(port, () => {
