@@ -9,7 +9,7 @@ const createTodo = async (req: Request, res: Response) => {
 
         // check before post if this userid is exist or not!
 
-        const isExist = await userServices.getSingleUser(Number(user_id));
+        const isExist = await userServices.getSingleUser(user_id);
 
         if (isExist.rows.length === 0) {
             res.status(404).json({
