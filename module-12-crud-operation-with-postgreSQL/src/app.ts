@@ -16,13 +16,14 @@ app.use(express.json());
 
 // Root route get method
 app.get('/', logger, (req: Request, res: Response) => {
-    res.send('Hello World')
+    res.send('Hello World');
 });
 
 // users route post method
 app.use("/users", userRoutes);
 app.use("/todos", todoRoutes);
-app.use("/auth", authRoutes)
+app.use("/auth", authRoutes);
+
 
 app.use((req: Request, res: Response) => {
     res.status(404).json({
